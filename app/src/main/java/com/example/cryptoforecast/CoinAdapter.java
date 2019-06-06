@@ -29,7 +29,7 @@ class CoinAdapter extends ArrayAdapter<String> {
         ImageView coinImage = (ImageView) coinView.findViewById(R.id.coinImageView);
 
         coinText.setText(singleCoinItem);
-        coinImage.setImageResource(coin.getDrawableId());
+        coinImage.setImageResource(R.drawable.bitcoin);
         return coinView;
 
     }

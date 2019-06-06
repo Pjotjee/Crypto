@@ -1,5 +1,6 @@
 package com.example.cryptoforecast;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String coins = String.valueOf(parent.getItemAtPosition(position));
+                        String coin = String.valueOf(parent.getItemAtPosition(position));
+
+                        // send the menuItem that was clicked to the activity through the intent
+                        Intent intent = new Intent(MainActivity.this, DataActivity.class);
+                        intent.putExtra("coin", coin);
+                        startActivity(intent);
                     }
                 }
         );
