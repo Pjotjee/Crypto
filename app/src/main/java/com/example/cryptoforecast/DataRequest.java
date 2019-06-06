@@ -6,7 +6,7 @@ public class DataRequest {
 
 
 
-
+/**
     OkHttpClient client = new OkHttpClient();
 
     TextClassification.Request request = new TextClassification.Request.Builder()
@@ -16,4 +16,5 @@ public class DataRequest {
             .build();
 
     Response response = client.newCall(request).execute();
+ **/
 }

@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String coin = String.valueOf(parent.getItemAtPosition(position));
+                        String coinName = String.valueOf(parent.getItemAtPosition(position));
 
                         // send the menuItem that was clicked to the activity through the intent
                         Intent intent = new Intent(MainActivity.this, DataActivity.class);
-                        intent.putExtra("coin", coin);
+                        intent.putExtra("coinName", coinName);
                         startActivity(intent);
                     }
                 }
