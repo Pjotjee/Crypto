@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+//API key: 76167b2102704673949b29deff56fd90
 public class NewsActivity extends AppCompatActivity {
 
     @Override
