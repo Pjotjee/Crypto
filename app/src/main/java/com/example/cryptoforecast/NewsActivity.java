@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -23,6 +24,8 @@ public class NewsActivity extends AppCompatActivity {
     String NEWS_SOURCE = "bbc-news";
     ListView listNews;
     ProgressBar loader;
+    private String NEWS_SUBJECT;
+
 
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
     static final String KEY_AUTHOR = "author";
@@ -40,6 +43,14 @@ public class NewsActivity extends AppCompatActivity {
         loader = (ProgressBar) findViewById(R.id.loader);
         listNews.setEmptyView(loader);
 
+        Bundle coinSelected = getIntent().getExtras();
+        if (coinSelected == null){
+            return;
+        }
+        // Find the name textfield and set the right name
+        String NEWS_SUBJECT = coinSelected.getString("coinName");
+        TextView coinText = (TextView) findViewById(R.id.coinNameTextView) ;
+        coinText.setText(NEWS_SUBJECT);
 
 
         if(NewsRequest.isNetworkAvailable(getApplicationContext()))
@@ -63,13 +74,15 @@ public class NewsActivity extends AppCompatActivity {
             String xml = "";
 
             String urlParameters = "";
-            xml = NewsRequest.excuteGet("https://newsapi.org/v1/articles?source="+NEWS_SOURCE+"&sortBy=top&apiKey="+API_KEY, urlParameters);
+            //xml = NewsRequest.excuteGet("https://newsapi.org/v1/articles?source="+NEWS_SOURCE+"&sortBy=top&apiKey="+API_KEY, urlParameters);
+            //xml = NewsRequest.excuteGet("https://newsapi.org/v2/top-headlines?q="+NEWS_SUBJECT+"&apiKey="+API_KEY, urlParameters);
+            xml = NewsRequest.excuteGet("https://newsapi.org/v2/everything?q="+NEWS_SUBJECT+"&language=en&apiKey="+API_KEY, urlParameters);
             return  xml;
         }
         @Override
         protected void onPostExecute(String xml) {
 
-            if(xml.length()>10){ // Just checking if not empty
+            if(xml.length()>1){ // Just checking if not empty
 
                 try {
                     JSONObject jsonResponse = new JSONObject(xml);
