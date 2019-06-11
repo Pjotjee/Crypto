@@ -40,11 +40,13 @@ private TextView requestTextView;
         requestTextView = findViewById(R.id.requestTextView);
 
         OkHttpClient client = new OkHttpClient();
-        String url = "https://rest.coinapi.io/v1/trades/BITSTAMP_SPOT_BTC_USD/history?time_start=2016-01-01T00:00:00";
+        //String url = "https://rest.coinapi.io/v1/trades/BITSTAMP_SPOT_BTC_USD/history?time_start=2016-01-01T00:00:00";
+        String url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR";
         Request request = new Request.Builder()
                 .url(url)
                 //.post(body)
-                .addHeader("X-CoinAPI-Key", "D75D66F0-B289-482E-ACA2-243B3634642D")
+                //.addHeader("Apikey", "D75D66F0-B289-482E-ACA2-243B3634642D")
+                .addHeader("Apikey", "635b4471780f89cd7d72b4afbfc10cde1157354272a6583e849964c523a7b75b")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
