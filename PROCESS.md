@@ -55,3 +55,12 @@ I think that the I will fetch the data from CryptoCompare.
 e.g. https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
 Since it has better documentation, and more free options.
 I can get 100.000 requests per month for free
+
+# Wednesday 12 - June
+
+We agreed to use https://google.github.io/styleguide/javaguide.html as a reference to our styleguide
+TAB IS 4 SPACES
+in the else statements: the closing brace has its own line
+Docstring at the beginning of the class /*   */
+and after that just line comments in the code using the // format
+no need to comment on variables like String name //bla bla bal

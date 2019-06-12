@@ -10,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -19,9 +21,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class DataActivity extends AppCompatActivity {
+public class DataActivity extends AppCompatActivity implements DataRequest.Callback{
 public String coinName;
 private TextView requestTextView;
+private int data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,11 @@ private TextView requestTextView;
         TextView coinText = (TextView) findViewById(R.id.coinNameTextView) ;
         coinText.setText(coinName);
 
-        requestTextView = findViewById(R.id.requestTextView);
+        //Gets categories with HTTP request
+        DataRequest request = new DataRequest(this);
+        request.getData(this);
+
+        /** requestTextView = findViewById(R.id.requestTextView);
 
         OkHttpClient client = new OkHttpClient();
         //String url = "https://rest.coinapi.io/v1/trades/BITSTAMP_SPOT_BTC_USD/history?time_start=2016-01-01T00:00:00";
@@ -70,8 +77,25 @@ private TextView requestTextView;
                 }
             }
         });
+        */
 
+    }
+    //** fill the list with information */
+    @Override
+    public void gotData(ArrayList<Integer> dataMin) {
+        // Sets adapter and listener for listView filled with data from HTTP request
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
+        TextView requestTextView = (TextView) findViewById(R.id.requestTextView);
+        requestTextView.setText(data.get(0));
+        /**ListView menuList = findViewById(R.id.dataList);
+        menuList.setAdapter(dataAdapter);
+        menuList.setOnItemClickListener(new OnItemItemClick()); */
+    }
 
+    //** check for errors */
+    @Override
+    public void gotDataError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void onClick(View view){
