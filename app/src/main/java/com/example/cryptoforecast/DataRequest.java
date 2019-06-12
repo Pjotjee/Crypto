@@ -2,6 +2,8 @@ package com.example.cryptoforecast;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,12 +43,13 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         // Creates new request and adds it to queue
         String url_total = url + ApiKey;
         try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url_total, null, this, this);
-            queue.add(jsonObjectRequest);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET ,url_total, null, this, this);
+
         }
         catch(Exception error) {
             Log.e("error", error.getMessage());
         }
+
 
     }
 
@@ -58,14 +61,14 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
 
     //** put the response JSONObject into an arraylist if succesfull */
     @Override
-    public void onResponse(JSONObject response) {
+    public void onResponse(JSONObject jsonObjectRequest) {
         try {
             // initialize the JSON array and create a new ArrayList of strings
-            JSONArray dataArray = response.getJSONArray("data");
+            JSONArray dataArray = jsonObjectRequest.getJSONArray("Data");
             //ArrayList<String> data = new ArrayList<>();
             for (int i = 0; i < dataArray.length(); i++) {
                 JSONObject dataObject = dataArray.getJSONObject(i);
-                int dataM = dataObject.getInt("Data");
+                int dataM = dataObject.getInt("low");
                 dataMin.add(dataM);
             }
             activity.gotData(dataMin);
