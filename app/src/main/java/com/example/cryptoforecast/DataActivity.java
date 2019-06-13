@@ -49,8 +49,7 @@ private int data;
         // Sets adapter and listener for listView filled with data from HTTP request
         TextView requestTextView = (TextView) findViewById(R.id.requestTextView);
         //requestTextView.setText("800");
-        requestTextView.setText(String.valueOf(dataMin.get(0)));
-
+        requestTextView.setText(String.valueOf(dataMin));
     }
 
     //** check for errors */

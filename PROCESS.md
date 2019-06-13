@@ -67,4 +67,7 @@ no need to comment on variables like String name //bla bla bla
 
 # Thursday 13 - June
 
-I wil continue to work on the data request 
+I wil continue to work on the data request
+The data request seem to work fine now, after some help from Renske
+Now I will choose on a graph to show the data in.
+AnyChart has caught my attention since it seem to show nice candle graphs.
