@@ -25,11 +25,11 @@ public class DataActivity extends AppCompatActivity implements DataRequest.Callb
 public String coinName;
 private TextView requestTextView;
 private int data;
-    @Override
+
+@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forecast_data);
-
         // receive the coin name through the intent
         Bundle coinSelected = getIntent().getExtras();
         if (coinSelected == null){
@@ -39,23 +39,17 @@ private int data;
         String coinName = coinSelected.getString("coinName");
         TextView coinText = (TextView) findViewById(R.id.coinNameTextView) ;
         coinText.setText(coinName);
-
-
         DataRequest request = new DataRequest(this);
         request.getData(this);
-
-        TextView requestTextView = (TextView) findViewById(R.id.requestTextView);
-        requestTextView.setText(request);
-
-
     }
+
     //** fill the list with information */
     @Override
     public void gotData(ArrayList<Integer> dataMin) {
         // Sets adapter and listener for listView filled with data from HTTP request
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
         TextView requestTextView = (TextView) findViewById(R.id.requestTextView);
-        requestTextView.setText(dataMin.get(0));
+        //requestTextView.setText("800");
+        requestTextView.setText(String.valueOf(dataMin.get(0)));
 
     }
 
@@ -66,7 +60,6 @@ private int data;
     }
 
     public void onClick(View view){
-
         // receive the coin name through the intent
         Bundle coinSelected = getIntent().getExtras();
         if (coinSelected == null){
@@ -74,9 +67,7 @@ private int data;
         }
         // Find the name textfield and set the right name
         String coinName = coinSelected.getString("coinName");
-
         Intent newsIntent = new Intent(DataActivity.this, NewsActivity.class);
-
         newsIntent.putExtra("coinName", coinName);
         startActivity(newsIntent);
     }

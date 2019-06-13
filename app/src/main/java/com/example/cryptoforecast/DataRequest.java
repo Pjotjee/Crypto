@@ -27,7 +27,6 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         void gotDataError(String message);
     }
     DataRequest(Context context) {
-
         this.context = context;
     }
 
@@ -44,13 +43,11 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         String url_total = url + ApiKey;
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET ,url_total, null, this, this);
-
+            queue.add(jsonObjectRequest);
         }
         catch(Exception error) {
             Log.e("error", error.getMessage());
         }
-
-
     }
 
     //** message in case of an error */
@@ -76,7 +73,7 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         // call the error method when JSONException occur
         catch(JSONException error){
             activity.gotDataError(error.getMessage());
+            error.printStackTrace();
         }
-
     }
 }
