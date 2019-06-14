@@ -61,7 +61,7 @@ I can get 100.000 requests per month for free
 We agreed to use https://google.github.io/styleguide/javaguide.html as a reference to our styleguide
 TAB IS 4 SPACES
 in the else statements: the closing brace has its own line
-Docstring at the beginning of the class /*   */
+Docstring at the beginning of the class /*   \*/
 and after that just line comments in the code using the // format
 no need to comment on variables like String name //bla bla bla
 
@@ -72,3 +72,12 @@ The data request seem to work fine now, after some help from Renske
 Now I will choose on a graph to show the data in.
 AnyChart has caught my attention since it seem to show nice candle graphs.
 MPandroidChart seems to be even better.
+
+# Friday 14 - June
+
+I have a nice candle chart working now, it's not exactly as I want it to be but ill fix that next week.
+Today I will try to get the forecast done.
+The calculations of the forecast are finished.
+I used ejml library for the mathematics.
+I only need to return the forecasted data to the other activity.
+I declare the alpha version as finished.

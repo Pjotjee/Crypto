@@ -18,12 +18,15 @@ import java.util.ArrayList;
 class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
     private Context context;                                    // context to send internet requests
     private Callback activity;                                  // callback to notify the activity
-    private ArrayList<Integer> dataMin = new ArrayList<Integer>();   // arrayList for the JSON elements
-
+    private ArrayList<Double> dataLow = new ArrayList<Double>();   // arrayList for the JSON elements
+    private ArrayList<Double> dataHigh = new ArrayList<Double>();   // arrayList for the JSON elements
+    private ArrayList<Double> dataTime = new ArrayList<Double>();   // arrayList for the JSON elements
+    private ArrayList<Double> dataOpen = new ArrayList<Double>();   // arrayList for the JSON elements
+    private ArrayList<Double> dataClose = new ArrayList<Double>();   // arrayList for the JSON elements
 
     //** declaration of callback to notify the activity */
     interface Callback {
-        void gotData(ArrayList<Integer> dataMin);
+        void gotData(ArrayList<Double> dataMin, ArrayList<Double> dataMax, ArrayList<Double> dataTime, ArrayList<Double> dataOpen, ArrayList<Double> dataClose);
         void gotDataError(String message);
     }
     DataRequest(Context context) {
@@ -37,7 +40,7 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         this.activity = activity;
         // Create new request queue for API requests
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=GBP&limit=10";
+        String url = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=GBP&limit=100";
         String ApiKey = "&api_key=635b4471780f89cd7d72b4afbfc10cde1157354272a6583e849964c523a7b75b";
         // Creates new request and adds it to queue
         String url_total = url + ApiKey;
@@ -65,10 +68,19 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
             //ArrayList<String> data = new ArrayList<>();
             for (int i = 0; i < dataArray.length(); i++) {
                 JSONObject dataObject = dataArray.getJSONObject(i);
-                int dataM = dataObject.getInt("low");
-                dataMin.add(dataM);
+                double low = dataObject.getDouble("low");
+                dataLow.add(low);
+                double high = dataObject.getDouble("high");
+                dataHigh.add(high);
+                double time = dataObject.getDouble("time");
+                dataTime.add(time);
+                double open = dataObject.getDouble("open");
+                dataOpen.add(open);
+                double close = dataObject.getDouble("close");
+                dataClose.add(close);
             }
-            activity.gotData(dataMin);
+
+            activity.gotData(dataHigh, dataLow, dataTime, dataOpen, dataClose);
         }
         // call the error method when JSONException occur
         catch(JSONException error){
