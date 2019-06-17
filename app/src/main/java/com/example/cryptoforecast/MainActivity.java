@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -17,8 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         String [] coins = {"Bitcoin","Ethereum","XRP","Bitcoin Cash", "Litecoin", "EOS", "Binance Coin", "Bitcoin SV", "Tether", "Stellar"};
-        ListAdapter coinsAdapter = new CoinAdapter(this, coins);
+        String [] symbol = {"BTC", "ETH", "XRP", "BCH", "LTC", "EOS", "BNB", "BSV", "USDT", "XLM" };
+        ListAdapter coinsAdapter = new CoinAdapter(this, symbol);
         ListView coinListView = (ListView) findViewById(R.id.coinListView);
+        //ImageView coinImageView = (ImageView) findViewById(R.id.coinImageView);
         coinListView.setAdapter(coinsAdapter);
 
         coinListView.setOnItemClickListener(

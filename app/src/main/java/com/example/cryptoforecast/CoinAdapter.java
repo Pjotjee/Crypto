@@ -29,7 +29,29 @@ class CoinAdapter extends ArrayAdapter<String> {
         ImageView coinImage = (ImageView) coinView.findViewById(R.id.coinImageView);
 
         coinText.setText(singleCoinItem);
-        coinImage.setImageResource(R.drawable.bitcoin);
+        if (singleCoinItem == "ETH"){
+            coinImage.setImageResource(R.drawable.eth);
+        }else if (singleCoinItem == "XRP") {
+            coinImage.setImageResource(R.drawable.xrp);
+        }else if (singleCoinItem == "LTC") {
+            coinImage.setImageResource(R.drawable.ltc);
+        }else if (singleCoinItem == "BCH") {
+            coinImage.setImageResource(R.drawable.bch);
+        }else if (singleCoinItem == "EOS") {
+            coinImage.setImageResource(R.drawable.eos);
+        }else if (singleCoinItem == "BNB") {
+            coinImage.setImageResource(R.drawable.bnb);
+        }else if (singleCoinItem == "BSV") {
+            coinImage.setImageResource(R.drawable.bsv);
+        }else if (singleCoinItem == "USDT") {
+            coinImage.setImageResource(R.drawable.usdt);
+        }else if (singleCoinItem == "XLM") {
+            coinImage.setImageResource(R.drawable.xlm);
+        } else {
+            coinImage.setImageResource(R.drawable.btc);
+        }
+        String image = "R.drawable."+ singleCoinItem;
+        //coinImage.setImageResource(Integer.valueOf(image));
         return coinView;
 
     }

@@ -81,3 +81,8 @@ The calculations of the forecast are finished.
 I used ejml library for the mathematics.
 I only need to return the forecasted data to the other activity.
 I declare the alpha version as finished.
+
+# Monday 17 - June
+
+I want to finish my list in the first screen today.
+And see how I can display the time in hours and minutes.
