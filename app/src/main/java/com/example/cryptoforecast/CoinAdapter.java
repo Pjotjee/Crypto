@@ -29,23 +29,23 @@ class CoinAdapter extends ArrayAdapter<String> {
         ImageView coinImage = (ImageView) coinView.findViewById(R.id.coinImageView);
 
         coinText.setText(singleCoinItem);
-        if (singleCoinItem == "ETH"){
+        if (singleCoinItem == "ETH" || singleCoinItem == "Ethereum"){
             coinImage.setImageResource(R.drawable.eth);
-        }else if (singleCoinItem == "XRP") {
+        }else if (singleCoinItem == "XRP" ) {
             coinImage.setImageResource(R.drawable.xrp);
-        }else if (singleCoinItem == "LTC") {
+        }else if (singleCoinItem == "LTC" || singleCoinItem == "Litecoin") {
             coinImage.setImageResource(R.drawable.ltc);
-        }else if (singleCoinItem == "BCH") {
+        }else if (singleCoinItem == "BCH" || singleCoinItem == "Bitcoin Cash") {
             coinImage.setImageResource(R.drawable.bch);
-        }else if (singleCoinItem == "EOS") {
+        }else if (singleCoinItem == "EOS" ) {
             coinImage.setImageResource(R.drawable.eos);
-        }else if (singleCoinItem == "BNB") {
+        }else if (singleCoinItem == "BNB" || singleCoinItem == "Binance Coin") {
             coinImage.setImageResource(R.drawable.bnb);
-        }else if (singleCoinItem == "BSV") {
+        }else if (singleCoinItem == "BSV" || singleCoinItem == "Bitcoin SV") {
             coinImage.setImageResource(R.drawable.bsv);
-        }else if (singleCoinItem == "USDT") {
+        }else if (singleCoinItem == "USDT" || singleCoinItem == "Tether") {
             coinImage.setImageResource(R.drawable.usdt);
-        }else if (singleCoinItem == "XLM") {
+        }else if (singleCoinItem == "XLM" || singleCoinItem == "Stellar") {
             coinImage.setImageResource(R.drawable.xlm);
         } else {
             coinImage.setImageResource(R.drawable.btc);

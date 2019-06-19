@@ -16,9 +16,9 @@ class DataForecast {
     private ArrayList<Double> listAutoThree = new ArrayList<Double>();
     private ArrayList<Double> listAutoFour = new ArrayList<Double>();
     private ArrayList<Double> listAutoFive = new ArrayList<Double>();
-    private double[][] xMatrix;
+
     private double[][] x_newMatrix;
-    private double[][] yMatrix;
+
     private ArrayList<Double> listMaOne = new ArrayList<Double>();
     private ArrayList<Double> listMaTwo = new ArrayList<Double>();
     private ArrayList<Double> listMaThree = new ArrayList<Double>();
@@ -48,9 +48,12 @@ class DataForecast {
             listAutoFive.add(dataLow.get(i));
         }
 
-        for (int i = 0 ; i < listAuto.size() ; i++){
-            xMatrix[i] = new double[]{ listAutoOne.get(i), listAutoTwo.get(i), listAutoThree.get(i),
-                    listAutoFour.get(i), listAutoFive.get(i)};
+
+        int m = listAuto.size();
+        double[][] xMatrix = new double[m][5];
+        double[][] yMatrix = new double[m][1];
+        for (int i = 0 ; i < m ; i++){
+            xMatrix[i] = new double[]{ listAutoOne.get(i), listAutoTwo.get(i), listAutoThree.get(i), listAutoFour.get(i), listAutoFive.get(i)};
             yMatrix[i] = new double[]{listAuto.get(i)};
         }
 
@@ -70,26 +73,27 @@ class DataForecast {
 
 
         for (int i = 4 ; i < n-1 ; i++){
-            listMaOne.add(dataLow.get(i));
+            listMaOne.add(e.get(i));
         }
         for (int i = 3 ; i < n-2 ; i++){
-            listMaTwo.add(dataLow.get(i));
+            listMaTwo.add(e.get(i));
         }
         for (int i = 2 ; i < n-3 ; i++){
-            listMaThree.add(dataLow.get(i));
+            listMaThree.add(e.get(i));
         }
         for (int i = 1 ; i < n-4 ; i++){
-            listMaFour.add(dataLow.get(i));
+            listMaFour.add(e.get(i));
         }
         for (int i = 0 ; i < n-5 ; i++){
-            listMaFive.add(dataLow.get(i));
+            listMaFive.add(e.get(i));
         }
 
-        for (int i = 0 ; i < listAuto.size() ; i++) {
+        double[][] x_newMatrix = new double[m][10];
+        for (int i = 0 ; i < n-5 ; i++) {
             x_newMatrix[i] = new double[]{ listAutoOne.get(i), listAutoTwo.get(i),
                     listAutoThree.get(i), listAutoFour.get(i), listAutoFive.get(i),
-                    listMaOne.get(i),listMaTwo.get(i),listMaThree.get(i),listMaFour.get(i),
-                    listMaFive.get(i) };
+                    listMaOne.get(i),listMaTwo.get(i),listMaThree.get(i),
+                    listMaFour.get(i), listMaFive.get(i) };
         }
 
         Xn = new SimpleMatrix(x_newMatrix);
@@ -99,9 +103,6 @@ class DataForecast {
         // b= (X'X)^-1 *X' y
         bn = XXt_invn.mult(Xn.transpose().mult(y));
 
-
-
     }
-
 
 }
