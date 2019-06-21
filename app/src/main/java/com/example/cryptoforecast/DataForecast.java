@@ -1,11 +1,18 @@
 package com.example.cryptoforecast;
 
+import android.util.Log;
+
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.ArrayList;
 
-class DataForecast {
+class DataForecast extends ArrayList<Double> {
 
+    private ArrayList<Double> dataHigh;
+    private ArrayList<Double> dataLow;
+    private ArrayList<Double> dataTime;
+    private ArrayList<Double> dataOpen;
+    private ArrayList<Double> dataClose;
     private float autoOne;
     private float autoTwo;
     private float maOne;
@@ -25,9 +32,23 @@ class DataForecast {
     private ArrayList<Double> listMaFour = new ArrayList<Double>();
     private ArrayList<Double> listMaFive = new ArrayList<Double>();
 
-    private SimpleMatrix X, XXt_inv,b,y, y_hat,e,Xn,XXt_invn, bn;
+    private SimpleMatrix X, XXt_inv,b,y, y_hat,e,Xn,XXt_invn, bn, y_est, X_f;
+    private ArrayList<Double> UNIX;
+    private int epoch;
+    private ArrayList<String> date;
+    private ArrayList<Double> forecast;
 
     public DataForecast(ArrayList<Double> dataLow, ArrayList<Double> dataHigh, ArrayList<Double> dataTime, ArrayList<Double> dataOpen, ArrayList<Double> dataClose) {
+        this.dataLow = dataLow;
+        this.dataHigh = dataHigh;
+        this.dataTime = dataTime;
+        this.dataOpen = dataOpen;
+        this.dataClose = dataClose;
+
+
+    }
+
+    public ArrayList<Double> DataForecast(ArrayList<Double> dataLow, ArrayList<Double> dataHigh, ArrayList<Double> dataTime, ArrayList<Double> dataOpen, ArrayList<Double> dataClose) {
 
         for (int i = 5 ; i < dataLow.size() ; i++){
             listAuto.add(dataLow.get(i));
@@ -89,6 +110,7 @@ class DataForecast {
         }
 
         double[][] x_newMatrix = new double[m][10];
+
         for (int i = 0 ; i < n-5 ; i++) {
             x_newMatrix[i] = new double[]{ listAutoOne.get(i), listAutoTwo.get(i),
                     listAutoThree.get(i), listAutoFour.get(i), listAutoFive.get(i),
@@ -100,9 +122,43 @@ class DataForecast {
 
         // (X'X)^-1
         XXt_invn = Xn.transpose().mult(Xn).invert();
+        // bn are the estimators of the ARMA(5,5) model
         // b= (X'X)^-1 *X' y
         bn = XXt_invn.mult(Xn.transpose().mult(y));
 
+        Log.d("THE VALUES OF BN ARE:", String.valueOf(bn));
+
+        // y_est are going to be the forecasted values
+        double[][] y_est = new double[120][1];
+
+        //double [] X_f = new double[5];
+        // Get the first row of the X matrix and multiply it with the b vector
+        X_f = b.mult(X.extractVector(true, 0));
+
+
+        for (int i= 0 ; i < 120 ; i++){
+
+            forecast.add(X_f.get(0,0));
+            //X_f = X.get();
+            //double value = X.get().mult(b);
+            //y_est[i] = new double[]{ value };
+            //forecast.add(y_est.get(i));
+        }
+        //forecast = new SimpleMatrix(y_est);
+        //return forecast;
+        return dataClose;
+
     }
+
+    private ArrayList<String> Time(ArrayList<Double> unix) {
+
+        for (int i = 0; i<unix.size() ; i++) {
+            int epoch = unix.get(i).intValue();
+            String dat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date(epoch * 1000));
+            date.add(dat);
+        }
+        return date;
+    }
+
 
 }

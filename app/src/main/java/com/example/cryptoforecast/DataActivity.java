@@ -69,7 +69,7 @@ private CandleStickChart candleChart;
         }
 
         DataForecast forecast = new DataForecast(dataLow, dataHigh, dataTime, dataOpen, dataClose);
-
+        ArrayList<Double> data2 = forecast;
 
         CandleDataSet set1 = new CandleDataSet(dataCandle, "Data");
         set1.setColor(Color.rgb(80, 80, 80));
