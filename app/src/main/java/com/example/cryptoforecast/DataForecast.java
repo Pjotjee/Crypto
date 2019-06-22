@@ -2,6 +2,8 @@ package com.example.cryptoforecast;
 
 import android.util.Log;
 
+
+import org.ejml.simple.SimpleBase;
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.ArrayList;
@@ -32,7 +34,8 @@ class DataForecast extends ArrayList<Double> {
     private ArrayList<Double> listMaFour = new ArrayList<Double>();
     private ArrayList<Double> listMaFive = new ArrayList<Double>();
 
-    private SimpleMatrix X, XXt_inv,b,y, y_hat,e,Xn,XXt_invn, bn, y_est, X_f;
+    private SimpleMatrix X, XXt_inv,b,y, y_hat,e,Xn,XXt_invn, bn, y_est, X_f, X_firstRow, yForecast;
+    private SimpleMatrix X_firstRowElements;
     private ArrayList<Double> UNIX;
     private int epoch;
     private ArrayList<String> date;
@@ -128,21 +131,31 @@ class DataForecast extends ArrayList<Double> {
 
         Log.d("THE VALUES OF BN ARE:", String.valueOf(bn));
 
-        // y_est are going to be the forecasted values
-        double[][] y_est = new double[120][1];
 
-        //double [] X_f = new double[5];
+
+
         // Get the first row of the X matrix and multiply it with the b vector
-        X_f = b.mult(X.extractVector(true, 0));
+        X_firstRow = X.extractVector(true, 0);
 
 
+
+        //yForecast, X_firstRowElements.extractMatrix(0,0,0,4));
+
+        //X_firstRow = SimpleMatrix(new double[]{X_firstRow[][],  });
         for (int i= 0 ; i < 120 ; i++){
 
-            forecast.add(X_f.get(0,0));
-            //X_f = X.get();
-            //double value = X.get().mult(b);
-            //y_est[i] = new double[]{ value };
-            //forecast.add(y_est.get(i));
+            // Calculate the forecasted value
+            yForecast = b.mult(X_firstRow);
+            // Add it to the forecast array
+            forecast.add(yForecast.get(0,0));
+
+            // Update the first row of the elements
+            double[] yForecastArray = yForecast.getMatrix();
+            double[][] X_firstRowArray = new double[1][5];
+            X_firstRowArray[0]= new double[]{yForecast.get(0),X_firstRow.get(0),X_firstRow.get(1), X_firstRow.get(2),X_firstRow.get(3) };
+
+            SimpleMatrix X_firstRow = new SimpleMatrix(X_firstRowArray);
+
         }
         //forecast = new SimpleMatrix(y_est);
         //return forecast;
