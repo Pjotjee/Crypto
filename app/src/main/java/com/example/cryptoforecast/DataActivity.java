@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.TextView;
@@ -44,32 +45,41 @@ private CandleStickChart candleChart;
         DataRequest request = new DataRequest(this);
         request.getData(this);
 
-        chart = findViewById(R.id.chart);
-        chart.setBackgroundColor(Color.WHITE);
+        //chart = findViewById(R.id.chart);
+        //chart.setBackgroundColor(Color.WHITE);
     }
 
     //** fill the list with information */
     @Override
     public void gotData(ArrayList<Double> dataLow, ArrayList<Double> dataHigh, ArrayList<Double> dataTime, ArrayList<Double> dataOpen, ArrayList<Double> dataClose) {
 
+        // First we make the forcast with the data
+        ArrayList<Double> dataLowF = DataForecast.DataForecast(dataLow);
+        ArrayList<Double> dataHighF = DataForecast.DataForecast(dataHigh);
+        ArrayList<Double> dataCloseF = DataForecast.DataForecast(dataClose);
+        ArrayList<Double> dataOpenF = DataForecast.DataForecast(dataOpen);
 
 
-
-        candleChart = (CandleStickChart) findViewById(R.id.chart);
-
-        ArrayList<CandleEntry> dataCandle= new ArrayList<>();
-        for (int i = 0 ; i < dataLow.size() ; i++ ) {
-            LOW = dataLow.get(i).floatValue();
-            HIGH = dataHigh.get(i).floatValue() ;
-            TIME = dataTime.get(i).floatValue();
-            CLOSE = dataClose.get(i).floatValue();
-            OPEN = dataOpen.get(i).floatValue();
-            dataCandle.add(new CandleEntry(TIME, HIGH , LOW, OPEN, CLOSE));
-
+        for (int i=0; i<120;i++){
+            int last = dataTime.size();
+            dataTime.add(dataTime.get(last-1)+60);
         }
 
-        DataForecast forecast = new DataForecast(dataLow, dataHigh, dataTime, dataOpen, dataClose);
-        ArrayList<Double> data2 = forecast;
+        candleChart = (CandleStickChart) findViewById(R.id.chart);
+        candleChart.setHighlightPerDragEnabled(true);
+        candleChart.setBackgroundColor(Color.LTGRAY);
+        int tijd =0;
+        ArrayList<CandleEntry> dataCandle= new ArrayList<>();
+        //for (int i = 90 ; i < 150 ; i++ ) {
+        for (int i = 0 ; i < 75 ; i++ ) {
+            tijd =i;
+            LOW = dataLowF.get(i).floatValue();
+            HIGH = dataHighF.get(i).floatValue() ;
+            TIME = dataTime.get(i).floatValue();
+            CLOSE = dataCloseF.get(i).floatValue();
+            OPEN = dataOpenF.get(i).floatValue();
+            dataCandle.add(new CandleEntry(tijd, HIGH , LOW, OPEN, CLOSE));
+        }
 
         CandleDataSet set1 = new CandleDataSet(dataCandle, "Data");
         set1.setColor(Color.rgb(80, 80, 80));
@@ -79,9 +89,9 @@ private CandleStickChart candleChart;
         set1.setDecreasingPaintStyle(Paint.Style.FILL);
         set1.setIncreasingColor(Color.rgb(122, 242, 84));
         set1.setIncreasingPaintStyle(Paint.Style.STROKE);
-        set1.setNeutralColor(Color.BLUE);
-        set1.setValueTextColor(Color.RED);
-
+        set1.setNeutralColor(Color.GRAY);
+        //set1.setValueTextColor(Color.RED);
+        set1.setDrawValues(false);
 
         CandleData data1 = new CandleData(set1);
 

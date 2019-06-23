@@ -86,3 +86,9 @@ I declare the alpha version as finished.
 
 I want to finish my list in the first screen today.
 And see how I can display the time in hours and minutes.
+
+
+# Saturday 22 - June
+
+I finally finished all the forecasts, there were a lot of troubles with the syntax of the libraries that I used.
+The CandleChart doesn't seem to plot certain indices. e.g. time 0 till 100 no problem, time 50 till 150 doesn't plot

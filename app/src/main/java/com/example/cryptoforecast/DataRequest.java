@@ -40,7 +40,7 @@ class DataRequest implements Response.Listener<JSONObject>, Response.ErrorListen
         this.activity = activity;
         // Create new request queue for API requests
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=GBP&limit=120";
+        String url = "https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=60";
         String ApiKey = "&api_key=635b4471780f89cd7d72b4afbfc10cde1157354272a6583e849964c523a7b75b";
         // Creates new request and adds it to queue
         String url_total = url + ApiKey;
