@@ -3,9 +3,8 @@ package com.example.cryptoforecast;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import android.widget.TextView;
@@ -67,11 +66,11 @@ private CandleStickChart candleChart;
 
         candleChart = (CandleStickChart) findViewById(R.id.chart);
         candleChart.setHighlightPerDragEnabled(true);
-        candleChart.setBackgroundColor(Color.LTGRAY);
+        candleChart.setBackgroundColor(Color.BLACK);
         int tijd =0;
         ArrayList<CandleEntry> dataCandle= new ArrayList<>();
         //for (int i = 90 ; i < 150 ; i++ ) {
-        for (int i = 0 ; i < 75 ; i++ ) {
+        for (int i = 0 ; i < 60 ; i++ ) {
             tijd =i;
             LOW = dataLowF.get(i).floatValue();
             HIGH = dataHighF.get(i).floatValue() ;
@@ -97,6 +96,11 @@ private CandleStickChart candleChart;
 
         candleChart.setData(data1);
         candleChart.invalidate();
+
+        int index = 59; //dataLow.size();
+        String currentLow = String.valueOf(dataLow.get(index));
+        TextView coinLow = (TextView) findViewById(R.id.textViewCurLow) ;
+        coinLow.setText(currentLow);
     }
 
     //** check for errors */
