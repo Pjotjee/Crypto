@@ -22,7 +22,9 @@ public class DataActivity extends AppCompatActivity implements DataRequest.Callb
 
 private CandleStickChart chart;
 private float LOW;
+private float minLOW;
 private float HIGH;
+private float maxHIGH;
 private float TIME;
 private float CLOSE;
 private float OPEN;
@@ -39,7 +41,7 @@ private CandleStickChart candleChart;
         }
         // Find the name textfield and set the right name
         String coinName = coinSelected.getString("coinName");
-        TextView coinText = (TextView) findViewById(R.id.coinNameTextView) ;
+        TextView coinText = (TextView) findViewById(R.id.coinTextView) ;
         coinText.setText(coinName);
         DataRequest request = new DataRequest(this);
         request.getData(this);
@@ -66,19 +68,58 @@ private CandleStickChart candleChart;
 
         candleChart = (CandleStickChart) findViewById(R.id.chart);
         candleChart.setHighlightPerDragEnabled(true);
-        candleChart.setBackgroundColor(Color.BLACK);
+        candleChart.setBackgroundColor(Color.DKGRAY);
         int tijd =0;
         ArrayList<CandleEntry> dataCandle= new ArrayList<>();
         //for (int i = 90 ; i < 150 ; i++ ) {
-        for (int i = 0 ; i < 60 ; i++ ) {
-            tijd =i;
+        LOW = 0;
+        minLOW = 999999;
+        HIGH = 0;
+        maxHIGH = 0;
+        for (int i = 0 ; i < 30 ; i++ ) {
+            tijd =i-30;
             LOW = dataLowF.get(i).floatValue();
+            if (minLOW > LOW){
+                minLOW = LOW;
+            }
             HIGH = dataHighF.get(i).floatValue() ;
+            if (maxHIGH < HIGH){
+                maxHIGH = HIGH;
+            }
             TIME = dataTime.get(i).floatValue();
             CLOSE = dataCloseF.get(i).floatValue();
             OPEN = dataOpenF.get(i).floatValue();
             dataCandle.add(new CandleEntry(tijd, HIGH , LOW, OPEN, CLOSE));
         }
+
+        TextView minLowPast = findViewById(R.id.textViewMinPrice);
+        minLowPast.setText(String.valueOf(minLOW));
+        TextView maxHighPast = findViewById(R.id.textViewMaxPrice);
+        maxHighPast.setText(String.valueOf(maxHIGH));
+        LOW = 0;
+        minLOW = 999999;
+        HIGH = 0;
+        maxHIGH = 0;
+
+        for (int i = 30 ; i < 60 ; i++ ) {
+            tijd =i-30;
+            LOW = dataLowF.get(i).floatValue();
+            if (minLOW > LOW){
+                minLOW = LOW;
+            }
+            HIGH = dataHighF.get(i).floatValue() ;
+            if (maxHIGH < HIGH){
+                maxHIGH = HIGH;
+            }
+            TIME = dataTime.get(i).floatValue();
+            CLOSE = dataCloseF.get(i).floatValue();
+            OPEN = dataOpenF.get(i).floatValue();
+            dataCandle.add(new CandleEntry(tijd, HIGH , LOW, OPEN, CLOSE));
+        }
+        TextView minLowFuture = findViewById(R.id.textViewMinPriceFuture);
+        minLowFuture.setText(String.valueOf(minLOW));
+        TextView maxHighFuture = findViewById(R.id.textViewMaxPriceFuture);
+        maxHighFuture.setText(String.valueOf(maxHIGH));
 
         CandleDataSet set1 = new CandleDataSet(dataCandle, "Data");
         set1.setColor(Color.rgb(80, 80, 80));
@@ -97,10 +138,13 @@ private CandleStickChart candleChart;
         candleChart.setData(data1);
         candleChart.invalidate();
 
-        int index = 59; //dataLow.size();
+        int index = 29; //dataLow.size();
         String currentLow = String.valueOf(dataLow.get(index));
         TextView coinLow = (TextView) findViewById(R.id.textViewCurLow) ;
         coinLow.setText(currentLow);
+        String currentHigh = String.valueOf(dataHigh.get(index));
+        TextView coinHigh = (TextView) findViewById(R.id.textViewCurHigh) ;
+        coinHigh.setText(currentHigh);
     }
 
     //** check for errors */

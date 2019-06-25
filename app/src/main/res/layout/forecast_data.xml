@@ -11,11 +11,22 @@
 
 
     <TextView
-        android:id="@+id/coinNameTextView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Coin" />
+        android:text="30 Minute Forecast"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/coinTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Coin"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,7 +47,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coinNameTextView">
+                app:layout_constraintTop_toBottomOf="@+id/title">
 
             </com.github.mikephil.charting.charts.CandleStickChart>
 
@@ -47,7 +58,7 @@
                 <TextView
                     android:id="@+id/requestTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="24dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
@@ -61,50 +72,70 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+                <TextView
+                    android:id="@+id/requestTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:outlineAmbientShadowColor="@android:color/background_light"
+                    android:outlineProvider="bounds"
+                    android:text="Current High:"
+                    android:textColor="@android:color/holo_orange_light"
+                    app:layout_constraintStart_toStartOf="@+id/requestTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/requestTextView" />
+
                 <Button
                     android:id="@+id/newsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="124dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="8dp"
+                    android:background="@android:color/holo_orange_light"
                     android:onClick="onClick"
-                    android:text="Button"
+                    android:text="News"
+                    android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/requestTextView" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
                     android:id="@+id/textViewCurLow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="144dp"
-                    android:text="CurPrice"
+                    android:layout_marginEnd="80dp"
+                    android:text="CurLowPrice"
                     android:textColor="@android:color/background_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/requestTextView" />
 
                 <TextView
+                    android:id="@+id/textViewCurHigh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CurHighPrice"
+                    android:textColor="@android:color/background_light"
+                    app:layout_constraintStart_toStartOf="@+id/textViewCurLow"
+                    app:layout_constraintTop_toTopOf="@+id/requestTextView2" />
+
+                <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="Minimum Price:"
                     android:textColor="@android:color/holo_orange_light"
-                    app:layout_constraintStart_toStartOf="@+id/requestTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/requestTextView" />
+                    app:layout_constraintStart_toStartOf="@+id/requestTextView2"
+                    app:layout_constraintTop_toBottomOf="@+id/requestTextView2" />
 
                 <TextView
                     android:id="@+id/textViewMinPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="100dp"
                     android:text="MinPrice"
                     android:textColor="@android:color/background_light"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textViewCurLow"
+                    app:layout_constraintStart_toStartOf="@+id/textViewCurHigh"
                     app:layout_constraintTop_toTopOf="@+id/textView4" />
 
                 <TextView
@@ -120,12 +151,51 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:outlineAmbientShadowColor="@android:color/background_light"
                     android:text="Maximum Price:"
                     android:textColor="@android:color/holo_orange_light"
                     app:layout_constraintStart_toStartOf="@+id/textView4"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Minimum Future Price:"
+                    android:textColor="@android:color/holo_orange_light"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/textViewMinPriceFuture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MinFuturePrice"
+                    android:textColor="@android:color/background_light"
+                    app:layout_constraintStart_toStartOf="@+id/textViewMaxPrice"
+                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+                <TextView
+                    android:id="@+id/textViewMaxPriceFuture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MaxFuturePrice"
+                    android:textColor="?attr/colorBackgroundFloating"
+                    app:layout_constraintStart_toStartOf="@+id/textViewMinPriceFuture"
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:outlineAmbientShadowColor="@android:color/background_light"
+                    android:text="Maximum Future Price:"
+                    android:textColor="@android:color/holo_orange_light"
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

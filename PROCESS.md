@@ -92,3 +92,11 @@ And see how I can display the time in hours and minutes.
 
 I finally finished all the forecasts, there were a lot of troubles with the syntax of the libraries that I used.
 The CandleChart doesn't seem to plot certain indices. e.g. time 0 till 100 no problem, time 50 till 150 doesn't plot
+
+# Sunday 23 - June
+
+I will make all good colors. And set all the correct fields with the right values.
+
+# Monday 24 - June
+
+Did a lot on the style and colors of DataForcast.

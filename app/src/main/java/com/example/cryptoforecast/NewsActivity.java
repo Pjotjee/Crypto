@@ -49,7 +49,7 @@ public class NewsActivity extends AppCompatActivity {
         }
         // Find the name textfield and set the right name
         String NEWS_SUBJECT = coinSelected.getString("coinName");
-        TextView coinText = (TextView) findViewById(R.id.coinNameTextView) ;
+        TextView coinText = (TextView) findViewById(R.id.title) ;
         coinText.setText(NEWS_SUBJECT);
 
 
