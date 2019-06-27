@@ -62,7 +62,7 @@ private CandleStickChart candleChart;
         }
         candleChart = (CandleStickChart) findViewById(R.id.chart);
         candleChart.setHighlightPerDragEnabled(true);
-        candleChart.setBackgroundColor(Color.DKGRAY);
+        candleChart.setBackgroundColor(Color.LTGRAY);
         TIME =0;
         LOW = 0;
         minLOW = 999999;
@@ -113,7 +113,7 @@ private CandleStickChart candleChart;
         // set the chart values
         CandleDataSet set1 = new CandleDataSet(dataCandle, "Data");
         set1.setColor(Color.rgb(80, 80, 80));
-        set1.setShadowColor(Color.LTGRAY);
+        set1.setShadowColor(Color.DKGRAY);
         set1.setShadowWidth(0.7f);
         set1.setDecreasingColor(Color.RED);
         set1.setDecreasingPaintStyle(Paint.Style.FILL);
