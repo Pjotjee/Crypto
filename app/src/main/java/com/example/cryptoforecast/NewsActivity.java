@@ -8,25 +8,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+In this activity the news articles of the coin will be shown in a list
+ */
 public class NewsActivity extends AppCompatActivity {
-
     String API_KEY = "76167b2102704673949b29deff56fd90";
-    String NEWS_SOURCE = "bbc-news";
+    String NEWS_SOURCE = "google-news";
     ListView listNews;
     ProgressBar loader;
     private String NEWS_SUBJECT;
-
-
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
     static final String KEY_AUTHOR = "author";
     static final String KEY_TITLE = "title";
@@ -38,21 +35,15 @@ public class NewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-
         listNews = (ListView) findViewById(R.id.listNews);
         loader = (ProgressBar) findViewById(R.id.loader);
         listNews.setEmptyView(loader);
-
         Bundle coinSelected = getIntent().getExtras();
         if (coinSelected == null){
             return;
         }
-        // Find the name textfield and set the right name
+        // find the name textfield and set the right name
         String NEWS_SUBJECT = coinSelected.getString("coinName");
-        TextView coinText = (TextView) findViewById(R.id.title) ;
-        coinText.setText(NEWS_SUBJECT);
-
-
         if(NewsRequest.isNetworkAvailable(getApplicationContext()))
         {
             DownloadNews newsTask = new DownloadNews();
@@ -60,30 +51,24 @@ public class NewsActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
         }
-
     }
 
-
+/* Gets the news from the API and put it in the adapter. */
     class DownloadNews extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
         protected String doInBackground(String... args) {
             String xml = "";
-
-            String urlParameters = "";
-            //xml = NewsRequest.excuteGet("https://newsapi.org/v1/articles?source="+NEWS_SOURCE+"&sortBy=top&apiKey="+API_KEY, urlParameters);
-            //xml = NewsRequest.excuteGet("https://newsapi.org/v2/top-headlines?q="+NEWS_SUBJECT+"&apiKey="+API_KEY, urlParameters);
-            xml = NewsRequest.excuteGet("https://newsapi.org/v2/everything?q="+NEWS_SUBJECT+"&language=en&apiKey="+API_KEY, urlParameters);
+            //String urlParameters = "";
+            xml = NewsRequest.executeGet("https://newsapi.org/v2/everything?source="+NEWS_SOURCE+"&q="+NEWS_SUBJECT+"&language=en&apiKey="+API_KEY);
             return  xml;
         }
+
         @Override
         protected void onPostExecute(String xml) {
-
             if(xml.length()>1){ // Just checking if not empty
-
                 try {
                     JSONObject jsonResponse = new JSONObject(xml);
                     JSONArray jsonArray = jsonResponse.optJSONArray("articles");
@@ -102,10 +87,9 @@ public class NewsActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
                 }
-
+                // Fill the adapter with the news articles
                 ListNewsAdapter adapter = new ListNewsAdapter(NewsActivity.this, dataList);
                 listNews.setAdapter(adapter);
-
                 listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
@@ -114,16 +98,9 @@ public class NewsActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 });
-
             }else{
                 Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
             }
         }
-
-
-
     }
-
-
-
 }

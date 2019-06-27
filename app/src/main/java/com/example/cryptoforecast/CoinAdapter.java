@@ -1,8 +1,6 @@
 package com.example.cryptoforecast;
 
 import android.content.Context;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+The coin adapter class is sets the right text and images into the list of MainActivity.
+ */
 class CoinAdapter extends ArrayAdapter<String> {
 
     public CoinAdapter(Context context, String[] coins) {
@@ -20,16 +21,12 @@ class CoinAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater coinInflater = LayoutInflater.from(getContext());
         View coinView = coinInflater.inflate(R.layout.coin_detail, parent, false);
-
-
         String singleCoinItem = getItem(position);
         TextView coinText = (TextView) coinView.findViewById(R.id.coinTextView);
         TextView coinName = (TextView) coinView.findViewById(R.id.coinName);
         TextView coinPrice = (TextView) coinView.findViewById(R.id.coinPrice);
         ImageView coinImage = (ImageView) coinView.findViewById(R.id.coinImageView);
-
         coinText.setText(singleCoinItem);
-
         if (singleCoinItem == "ETH" || singleCoinItem == "Ethereum"){
             coinImage.setImageResource(R.drawable.eth);
             coinName.setText("Ethereum");
@@ -70,11 +67,7 @@ class CoinAdapter extends ArrayAdapter<String> {
             coinImage.setImageResource(R.drawable.btc);
             coinName.setText("Bitcoin");
             coinPrice.setText("$11.023,75");
-
         }
-        String image = "R.drawable."+ singleCoinItem;
-        //coinImage.setImageResource(Integer.valueOf(image));
         return coinView;
-
     }
 }
