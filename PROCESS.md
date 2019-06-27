@@ -87,6 +87,10 @@ I declare the alpha version as finished.
 I want to finish my list in the first screen today.
 And see how I can display the time in hours and minutes.
 
+# Tuesday 18 - June
+
+I tried to get different sources for the news, but it doesn't seem to work.
+
 
 # Saturday 22 - June
 
@@ -100,3 +104,11 @@ I will make all good colors. And set all the correct fields with the right value
 # Monday 24 - June
 
 Did a lot on the style and colors of DataForcast.
+
+# Tuesday 25 - June
+
+Changed so variable names to match the style guide.
+
+# Wednesday 26 - June
+
+Put a lot of extra comments in the code, removed unused variables.  
