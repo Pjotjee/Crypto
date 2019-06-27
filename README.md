@@ -28,3 +28,5 @@ NewsAPI: https://newsapi.org/
 
 
 Copyright © 2019 P. van Hulst All Rights Reserved
+
+Creator: Pjotr van Hulst
