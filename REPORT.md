@@ -22,7 +22,7 @@ The MainActivity only has an onCreate() method that calls on CoinAdapter(),
 this CoinAdapter fills all the list entries with a getView() method.
 
 1. MainActivity
-** MainActivity()
-*** onCreat()
-** CoinAdapter()
-*** getView()
+    MainActivity()
+    - onCreat()
+    CoinAdapter()
+    - getView()
