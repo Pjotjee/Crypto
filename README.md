@@ -4,7 +4,7 @@ Android Application to forecast cryptocurrencies
 Demo: https://youtu.be/XbI466CcXYU
 
 
-## For whO?
+## For who?
 
 People who are interested in crypto currencies like Bitcoin often like to know how the price will move in the future.
 There are not a lot of apps on the market who provide these predictions.
@@ -17,5 +17,5 @@ This will allow the user to implement their own strategy given the prediction.
 
 ### ScreenShots:
 
-![Screen shot 1](/images/ScreenShot1.png)
-![Screen shot 2](/images/ScreenShot2.png)
+![Screen shot 1](/Crypto/images/ScreenShot1.png)
+![Screen shot 2](/Crypto/images/ScreenShot2.png)
