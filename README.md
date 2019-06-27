@@ -25,3 +25,6 @@ API's used:
 
 coinAPI: https://www.coinapi.io/
 NewsAPI: https://newsapi.org/
+
+
+Copyright © 2019 P. van Hulst All Rights Reserved
