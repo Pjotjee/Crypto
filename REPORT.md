@@ -18,11 +18,21 @@ There are three Activities in this application.
 2. DataActivity: The coin forecast overview
 3. NewsActivity: The list with news articles of the coin.
 
-The MainActivity only has an onCreate() method that calls on CoinAdapter(),
+The MainActivity has an onCreate() method that calls on CoinAdapter(),
 this CoinAdapter fills all the list entries with a getView() method.
+The setOnItemClickListener() is called when the user clicks on a coin in them
+list, and it will start the DataActivity.
 
 1. MainActivity
+
     MainActivity()
     - onCreat()
+    - CoinAdapter()
+    - setOnItemClickListener()
+
     CoinAdapter()
     - getView()
+
+2. DataActivity
+
+    DataActivity()
