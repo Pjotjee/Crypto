@@ -19,3 +19,9 @@ This will allow the user to implement their own strategy given the prediction.
 
 ![Screen shot 1](/docs/ScreenShot1.png)
 ![Screen shot 2](/docs/ScreenShot2.png)
+
+
+API's used:
+
+coinAPI: https://www.coinapi.io/
+NewsAPI: https://newsapi.org/
