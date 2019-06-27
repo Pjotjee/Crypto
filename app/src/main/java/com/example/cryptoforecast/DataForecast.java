@@ -1,6 +1,6 @@
 package com.example.cryptoforecast;
 
-import android.util.Log;
+
 import org.ejml.simple.SimpleMatrix;
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ class DataForecast extends ArrayList<Double> {
         ArrayList<Double> listAutoThree = new ArrayList<Double>();
         ArrayList<Double> listAutoFour = new ArrayList<Double>();
         ArrayList<Double> listAutoFive = new ArrayList<Double>();
-        SimpleMatrix X, XXt_inv,b,y, X_firstRow, yForecast;
+        SimpleMatrix X, xXtInv, b, y, xFirstRow, yForecast;
         // create the auto regressive values
         for (int i = 5 ; i < data.size() ; i++){
             listAuto.add(data.get(i));
@@ -38,20 +38,20 @@ class DataForecast extends ArrayList<Double> {
         y = new SimpleMatrix(yMatrix);
         X = new SimpleMatrix(xMatrix);
         // (X'X)^-1
-        XXt_inv = X.transpose().mult(X).invert();
+        xXtInv = X.transpose().mult(X).invert();
         // b= (X'X)^-1 *X' y
-        b = XXt_inv.mult(X.transpose().mult(y));
+        b = xXtInv.mult(X.transpose().mult(y));
         // get the first row of the X matrix and multiply it with the b vector
-        X_firstRow = X.extractVector(true, 0);
+        xFirstRow = X.extractVector(true, 0);
         for (int i= 0 ; i < 60 ; i++){
             // calculate the forecasted value
-            yForecast = b.mult(X_firstRow);
+            yForecast = b.mult(xFirstRow);
             // add it to the forecast array
             data.add(yForecast.get(0,0));
             // update the first row of the elements
             double[][] X_firstRowArray = new double[1][5];
-            X_firstRowArray[0]= new double[]{yForecast.get(0),X_firstRow.get(0),X_firstRow.get(1), X_firstRow.get(2),X_firstRow.get(3) };
-            X_firstRow = new SimpleMatrix(X_firstRowArray);
+            X_firstRowArray[0]= new double[]{yForecast.get(0),xFirstRow.get(0),xFirstRow.get(1), xFirstRow.get(2),xFirstRow.get(3) };
+            xFirstRow = new SimpleMatrix(X_firstRowArray);
         }
         return data;
     }

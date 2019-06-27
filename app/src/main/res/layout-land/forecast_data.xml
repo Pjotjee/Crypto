@@ -9,26 +9,6 @@
     android:orientation="vertical"
     tools:context=".DataActivity">
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="30 Minute Forecast"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/coinTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Coin"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
