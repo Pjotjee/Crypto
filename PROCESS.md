@@ -9,7 +9,7 @@ Today I finished the Proposal, created the Github repository and the README.
 I started and finished the sketch.
 
 ### Sketch
-![Proposal Sketch](/images/SketchApp.png)
+![Proposal Sketch](/docs/SketchApp.png)
 
 
 # Tuesday 4 - June
@@ -17,7 +17,7 @@ I started and finished the sketch.
 I started with the sketch Design
 
 ### Sketch
-![Proposal Sketch](/images/DesignSketch.png)
+![Proposal Sketch](/docs/DesignSketch.png)
 
 # Wednesday 5 - June
 

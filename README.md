@@ -17,5 +17,5 @@ This will allow the user to implement their own strategy given the prediction.
 
 ### ScreenShots:
 
-![Screen shot 1](/Crypto/images/ScreenShot1.png)
-![Screen shot 2](/Crypto/images/ScreenShot2.png)
+![Screen shot 1](/docs/ScreenShot1.png)
+![Screen shot 2](/docs/ScreenShot2.png)
